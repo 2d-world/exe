@@ -1,3 +1,0 @@
-[
-{ "directory": "/Users/user/workspace/2d-world/exe", "file": "-", "output": "/var/folders/zv/3nn0m0_n27sbcs2449gg7wsm0000gn/T/--77c1a4.o", "arguments": ["/opt/homebrew/Cellar/llvm/18.1.5/bin/clang-18", "-xc", "--sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk", "-", "-o", "/var/folders/zv/3nn0m0_n27sbcs2449gg7wsm0000gn/T/--77c1a4.o", "-mlinker-version=1053.12", "-dumpdir", "/dev/null-", "-mmacos-version-min=14.0.0", "--target=arm64-apple-macosx14.0.0"]},
-]
