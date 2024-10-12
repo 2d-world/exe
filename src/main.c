@@ -46,8 +46,9 @@ int main(int argc, char **argv) {
 
   const bool V = check_env_variable("V");
 
-  if (V)
+  if (V) {
     puts("Loading core");
+  }
   const Library core = LibraryOpen(argv[1]);
   tInit init = (tInit)LibraryGet(core, "tInit");
   tRegisterPlugin registerPlugin =
@@ -56,31 +57,41 @@ int main(int argc, char **argv) {
 
   const T t = init();
   if (!t) {
-    if (V)
+    if (V) {
       puts("Failed to initialize core");
+    }
     abort();
   }
 
-  if (V)
+  if (V) {
     puts("Loading plugins");
+  }
   for (int i = 2; i < argc; i++) {
-    Library tmp = LibraryOpen(argv[i]);
-    if (V)
+    if (V) {
       printf("  %s: start\n", argv[i]);
+    }
+    Library tmp = LibraryOpen(argv[i]);
     const TPlugin plugin = (TPlugin)LibraryGet(tmp, "plugin");
-    if (V)
+    if (V) {
       printf("  %s: loaded\n", argv[i]);
+    }
     if (registerPlugin(t, plugin)) {
-      if (V)
+      if (V) {
         printf("Failed to register plugin: %s\n", argv[i]);
+      }
       abort();
     }
-    if (V)
+    if (V) {
       printf("  %s: done\n", argv[i]);
+    }
   }
-  if (V)
+  if (V) {
     puts("done");
-
-  if (start(t))
+  }
+  if (start(t)) {
+    if (V) {
+      puts("Failed to start");
+    }
     abort();
+  }
 }
