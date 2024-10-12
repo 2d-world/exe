@@ -49,11 +49,12 @@ int main(int argc, char **argv) {
   if (V)
     puts("Loading core");
   const Library core = LibraryOpen(argv[1]);
-  tInit tInit = LibraryGet(core, "tInit");
-  tRegisterPlugin tRegisterPlugin = LibraryGet(core, "tRegisterPlugin");
-  tStart tStart = LibraryGet(core, "tStart");
+  tInit init = (tInit)LibraryGet(core, "tInit");
+  tRegisterPlugin registerPlugin =
+      (tRegisterPlugin)LibraryGet(core, "tRegisterPlugin");
+  tStart start = (tStart)LibraryGet(core, "tStart");
 
-  const T t = tInit();
+  const T t = init();
   if (!t) {
     if (V)
       puts("Failed to initialize core");
@@ -66,10 +67,10 @@ int main(int argc, char **argv) {
     Library tmp = LibraryOpen(argv[i]);
     if (V)
       printf("  %s: start\n", argv[i]);
-    const TPlugin plugin = LibraryGet(tmp, "plugin");
+    const TPlugin plugin = (TPlugin)LibraryGet(tmp, "plugin");
     if (V)
       printf("  %s: loaded\n", argv[i]);
-    if (tRegisterPlugin(t, plugin)) {
+    if (registerPlugin(t, plugin)) {
       if (V)
         printf("Failed to register plugin: %s\n", argv[i]);
       abort();
@@ -80,6 +81,6 @@ int main(int argc, char **argv) {
   if (V)
     puts("done");
 
-  if (tStart(t))
+  if (start(t))
     abort();
 }
