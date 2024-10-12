@@ -7,9 +7,12 @@ include_directories(include)
 
 add_executable(TExe src/main.c src/Library.c)
 
-target_include_directories(TExe PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
+target_include_directories(TExe
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+  PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/external_headers>
 )
 
 set_target_properties(TExe PROPERTIES OUTPUT_NAME "TExe")
