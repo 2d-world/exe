@@ -4,7 +4,7 @@ typedef _Bool err_t;
 
 // write once, read only map
 typedef struct TMap *TMap;
-typedef TMap (*TMap_new)();
+typedef TMap (*TMap_new)(void);
 typedef err_t (*TMap_insert)(TMap map, const char *key, void *value,
                              void (*deleteValue)(void *value));
 typedef void *(*TMap_search)(TMap map, const char *key);
@@ -21,7 +21,7 @@ struct THandle {
 typedef struct THandle *(*TOn)(T context, const char *event_name, void *args);
 typedef err_t (*TPlugin)(T context, TOn on);
 
-typedef T (*tInit)();
+typedef T (*tInit)(void);
 typedef err_t (*tRegisterPlugin)(T self, TPlugin plugin);
 typedef err_t (*tStart)(T self);
 typedef void (*tDestroy)(T self);
